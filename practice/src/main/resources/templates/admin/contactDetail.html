@@ -23,9 +23,9 @@
     <p>
         <a th:href="@{/admin/contact/{id}/edit(id=${contact.id})}">編集</a>
     </p>
-    <form th:action="@{/admin/contact/{id}/delete(id=${contact.id})}" method="post">
-        <button type="submit">削除</button>
-    </form>
+    <p>
+        <a th:href="@{/admin/contact/{id}/delete(id=${contact.id})}">削除</a>
+    </p>
     <p><a th:href="@{/admin/contacts}">一覧へ戻る</a></p>
 </body>
 </html>
