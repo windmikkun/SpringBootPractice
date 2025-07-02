@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>お問い合わせ編集</title>
+</head>
+<body>
+    <h1>お問い合わせ編集</h1>
+    <form th:action="@{/admin/contact/{id}/edit(id=${contactId})}" method="post">
+        <table>
+            <tr>
+                <th>姓</th>
+                <td>
+                    <input type="text" name="lastName" th:value="${contactForm.lastName}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>名</th>
+                <td>
+                    <input type="text" name="firstName" th:value="${contactForm.firstName}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td>
+                    <input type="email" name="email" th:value="${contactForm.email}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td>
+                    <input type="text" name="phone" th:value="${contactForm.phone}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>郵便番号</th>
+                <td>
+                    <input type="text" name="zipCode" th:value="${contactForm.zipCode}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>住所</th>
+                <td>
+                    <input type="text" name="address" th:value="${contactForm.address}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>建物名</th>
+                <td>
+                    <input type="text" name="buildingName" th:value="${contactForm.buildingName}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>お問い合わせ種別</th>
+                <td>
+                    <input type="text" name="contactType" th:value="${contactForm.contactType}" required>
+                </td>
+            </tr>
+            <tr>
+                <th>内容</th>
+                <td>
+                    <textarea name="body" rows="5" cols="40" required th:text="${contactForm.body}"></textarea>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">更新</button>
+    </form>
+    <p><a th:href="@{/admin/contact/{id}(id=${contactId})}">詳細へ戻る</a></p>
+    <p><a th:href="@{/admin/contacts}">一覧へ戻る</a></p>
+</body>
+</html>

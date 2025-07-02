@@ -18,11 +18,38 @@ public class ContactServiceImpl implements ContactService {
 	public List<Contact> findAllContacts() {
 		return contactRepository.findAll();
 	}	
+
+	@Override
+	public Contact findContactById(Long id) {
+		return contactRepository.findById(id).orElse(null);
+	}
 	@Override
 	public void saveContact(ContactForm contactForm) {
 		// TODO 自動生成されたメソッド・スタブ
 		Contact contact = new Contact();
-		
+		getContact(contactForm);
+		contactRepository.save(contact);
+	}
+
+	@Override
+	public void updateContact(Long id, ContactForm contactForm){
+		Contact contact = contactRepository.findById(id).orElse(null);
+		if (contact == null){
+			return;
+		}
+		getContact(contactForm);
+		contactRepository.save(contact);
+	}
+
+	@Override
+	public void deleteContact(Long id) {
+		contactRepository.deleteById(id);
+	}
+	
+	//save to updateで使用するため共通化
+	private void getContact(ContactForm contactForm){
+		Contact contact = new Contact();
+
 		contact.setLastName(contactForm.getLastName());
 		contact.setFirstName(contactForm.getFirstName());
 		contact.setEmail(contactForm.getEmail());
@@ -32,8 +59,5 @@ public class ContactServiceImpl implements ContactService {
 		contact.setBuildingName(contactForm.getBuildingName());
 		contact.setContactType(contactForm.getContactType());
 		contact.setBody(contactForm.getBody());
-		
-		contactRepository.save(contact);
 	}
-
 }
