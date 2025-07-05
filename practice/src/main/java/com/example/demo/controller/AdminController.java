@@ -1,13 +1,17 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 
 import com.example.demo.service.ContactService;
 import com.example.demo.entity.Contact;
@@ -32,7 +36,7 @@ public class AdminController {
     public String showContact(@PathVariable Long id, Model model) {
         Contact contact = contactService.findContactById(id);
         if (contact == null){
-            return "redirect:/admin/contacts";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"該当するIDがありません");
         }
         model.addAttribute("contact", contact);
         return "admin/contactDetail";
@@ -62,7 +66,12 @@ public class AdminController {
 
     //更新
     @PostMapping("/contact/{id}/edit")
-    public String updateContact(@PathVariable Long id, @ModelAttribute ContactForm contactForm) {
+    public String updateContact(@PathVariable Long id, @ModelAttribute @Valid ContactForm contactForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contactForm", contactForm);
+            model.addAttribute("contactId", id);
+            return "admin/contactEdit";
+        }
         contactService.updateContact(id, contactForm);
         return "redirect:/admin/contact/" + id;
     } 

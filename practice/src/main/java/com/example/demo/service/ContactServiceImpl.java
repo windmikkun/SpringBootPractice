@@ -26,8 +26,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public void saveContact(ContactForm contactForm) {
 		// TODO 自動生成されたメソッド・スタブ
-		Contact contact = new Contact();
-		getContact(contactForm);
+		Contact contact = getContact(contactForm);
 		contactRepository.save(contact);
 	}
 
@@ -37,7 +36,7 @@ public class ContactServiceImpl implements ContactService {
 		if (contact == null){
 			return;
 		}
-		getContact(contactForm);
+		updateContactValues(contact, contactForm);
 		contactRepository.save(contact);
 	}
 
@@ -46,10 +45,19 @@ public class ContactServiceImpl implements ContactService {
 		contactRepository.deleteById(id);
 	}
 	
-	//save to updateで使用するため共通化
-	private void getContact(ContactForm contactForm){
-		Contact contact = new Contact();
 
+	private Contact getContact(ContactForm contactForm){
+		Contact contact = new Contact();
+		copyContactValues(contact, contactForm);
+		return contact;
+	}
+
+	private void updateContactValues(Contact contact, ContactForm contactForm){
+		copyContactValues(contact, contactForm);
+	}
+	
+    //updateとsave共通化
+	private void copyContactValues(Contact contact, ContactForm contactForm){
 		contact.setLastName(contactForm.getLastName());
 		contact.setFirstName(contactForm.getFirstName());
 		contact.setEmail(contactForm.getEmail());
