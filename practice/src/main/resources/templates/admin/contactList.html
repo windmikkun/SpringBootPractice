@@ -21,8 +21,8 @@
         <tbody>
             <tr th:each="contact : ${contacts}">
                 <td th:text="${contact.id}"></td>
-                <td th:text="${contact.firstName}"></td>
                 <td th:text="${contact.lastName}"></td>
+                <td th:text="${contact.firstName}"></td>
                 <td th:text="${contact.email}"></td>
                 <td th:text="${contact.contactType}"></td>
                 <td th:text="${contact.createdAt}"></td>
