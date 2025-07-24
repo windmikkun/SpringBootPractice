@@ -18,10 +18,10 @@ public class Admin {
     private Long id;
 
     @Column(name = "last_name", nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(name = "first_name", nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -30,11 +30,11 @@ public class Admin {
     private String password;
 
     @Column(name = "current_sign_in_at")
-    private LocalDateTime current_sign_in_at;
+    private LocalDateTime currentSignInAt;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 }

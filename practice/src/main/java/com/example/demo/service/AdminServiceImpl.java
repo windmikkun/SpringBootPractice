@@ -20,8 +20,8 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Admin register(AdminForm form) {
         Admin admin = new Admin();
-        admin.setLast_name(form.getLastName());
-        admin.setFirst_name(form.getFirstName());
+        admin.setLastName(form.getLastName());
+        admin.setFirstName(form.getFirstName());
         admin.setEmail(form.getEmail());
         admin.setPassword(passwordEncoder.encode(form.getPassword()));
         return adminRepository.save(admin);
