@@ -24,6 +24,11 @@ public class AdminServiceImpl implements AdminService{
         admin.setFirstName(form.getFirstName());
         admin.setEmail(form.getEmail());
         admin.setPassword(passwordEncoder.encode(form.getPassword()));
-        return adminRepository.save(admin);
+        Admin saveAdmin=adminRepository.save(admin);
+        // return saveAdmin;
+        //デバッグ用出力
+        Admin findAdmin = adminRepository.findById(saveAdmin.getId()).orElse(saveAdmin);
+        System.out.println("ID:"+findAdmin.getId()+",Email:"+findAdmin.getEmail());
+        return findAdmin;
     }
 }
