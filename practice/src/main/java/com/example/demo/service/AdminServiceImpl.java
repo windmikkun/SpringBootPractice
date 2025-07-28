@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService{
         // return saveAdmin;
         //デバッグ用出力
         Admin findAdmin = adminRepository.findById(saveAdmin.getId()).orElse(saveAdmin);
-        System.out.println("ID:"+findAdmin.getId()+",Email:"+findAdmin.getEmail());
+        System.out.println("ID:"+findAdmin.getId()+",Email:"+findAdmin.getEmail()+",CreatedAt:"+findAdmin.getCreatedAt());
         return findAdmin;
     }
 }
